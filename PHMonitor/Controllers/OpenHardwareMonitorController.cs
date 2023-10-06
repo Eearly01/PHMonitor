@@ -4,9 +4,9 @@ using OpenHardwareMonitor.Hardware;
 
 namespace YourNamespace.Controllers
 {
+    [Authorize]
     [Route("api/openhardware")]
     [ApiController]
-    [Authorize]
     public class CpuTemperatureController : ControllerBase
     {
         [HttpGet]
