@@ -34,11 +34,12 @@ export class FetchData extends Component {
 
     async populateCpuTemperature() {
         const token = await authService.getAccessToken();
+        console.log('Access Token:', token); // Log the access token
         try {
             const response = await fetch('api/openhardware', {
                 headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
             });
-
+            console.log('Response Status:', response.status); // Log the response status
             if (response.status === 200) {
                 const data = await response.json();
                 this.setState({ temperature: data.temperature, loading: false });
@@ -52,6 +53,6 @@ export class FetchData extends Component {
             console.error('Error fetching data:', error);
             this.setState({ loading: false });
         }
-
     }
+
 }

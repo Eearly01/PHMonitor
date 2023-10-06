@@ -40,9 +40,9 @@ else
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-app.UseRouting();
 
 app.UseAuthentication();
+app.UseRouting();
 app.UseIdentityServer();
 app.UseAuthorization();
 
