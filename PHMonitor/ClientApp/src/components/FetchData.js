@@ -40,7 +40,7 @@ export class FetchData extends Component {
                 headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
             });
             console.log('Response Status:', response.status); // Log the response status
-            console.log(response.json);
+            console.log(await response.json);
             if (response.status === 200) {
                 const data = await response.json();
                 console.log(data);

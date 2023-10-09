@@ -5,8 +5,8 @@ using LibreHardwareMonitor.Hardware;
 namespace PHMonitor.Controllers
 {
     [Authorize]
-    [Route("api/hardware")]
     [ApiController]
+    [Route("api/hardware")]
     public class CpuTemperatureController : ControllerBase
     {
         [HttpGet]
