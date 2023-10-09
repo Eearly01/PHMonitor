@@ -1,6 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\PHMonitor",
+    "\\PHMonitor\\ClientApp\\public",
+    "\\PHMonitor\\Controllers",
+    "\\PHMonitor\\Data"
   ],
+  "SelectedNode": "\\PHMonitor\\Program.cs",
   "PreviewInSolutionExplorer": false
 }

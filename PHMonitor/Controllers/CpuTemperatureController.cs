@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using OpenHardwareMonitor.Hardware;
+using LibreHardwareMonitor.Hardware;
 
-namespace YourNamespace.Controllers
+namespace PHMonitor.Controllers
 {
     [Authorize]
-    [Route("api/openhardware")]
+    [Route("api/hardware")]
     [ApiController]
     public class CpuTemperatureController : ControllerBase
     {
@@ -14,8 +14,8 @@ namespace YourNamespace.Controllers
         {
             Computer c = new Computer
             {
-                GPUEnabled = true,
-                CPUEnabled = true,
+                IsGpuEnabled = true,
+                IsCpuEnabled = true,
             };
 
             c.Open();
@@ -24,7 +24,7 @@ namespace YourNamespace.Controllers
 
             foreach (var hardware in c.Hardware)
             {
-                if (hardware.HardwareType == HardwareType.CPU)
+                if (hardware.HardwareType == HardwareType.Cpu)
                 {
                     hardware.Update();
 

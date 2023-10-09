@@ -36,12 +36,14 @@ export class FetchData extends Component {
         const token = await authService.getAccessToken();
         console.log('Access Token:', token); // Log the access token
         try {
-            const response = await fetch('api/openhardware', {
+            const response = await fetch('api/hardware', {
                 headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
             });
             console.log('Response Status:', response.status); // Log the response status
+            console.log(response.json);
             if (response.status === 200) {
                 const data = await response.json();
+                console.log(data);
                 this.setState({ temperature: data.temperature, loading: false });
             } else {
                 console.error('API returned status code:', response.status);
