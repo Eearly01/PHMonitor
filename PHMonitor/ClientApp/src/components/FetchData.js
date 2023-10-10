@@ -51,9 +51,9 @@ export class FetchData extends Component {
             const response = await fetch('api/hardware', {
                 headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
             });
-            console.log(await response.json);
             if (response.status === 200) {
                 const data = await response.json();
+                console.log(data);
 
                 if (data.hardware && Array.isArray(data.hardware) && data.hardware.length > 0) {
 

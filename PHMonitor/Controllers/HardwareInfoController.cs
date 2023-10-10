@@ -37,7 +37,6 @@ namespace PHMonitor.Controllers
                 IsMemoryEnabled = true,
                 IsMotherboardEnabled = true,
                 IsControllerEnabled = true,
-                IsNetworkEnabled = true,
                 IsStorageEnabled = true,
             };
 
@@ -47,10 +46,13 @@ namespace PHMonitor.Controllers
             var hardwareInfoDtos = c.Hardware.Select(h => new HardwareInfoDto
             {
                 Name = h.Name,
+                HType = h.HardwareType.ToString(),
                 Sensors = h.Sensors.Select(s => new SensorInfoDto
                 {
                     Name = s.Name,
-                    Value = s.Value
+                    Value = s.Value,
+                    SensorType = s.SensorType.ToString(),
+
                 }).ToList(),
             }).ToList();
 
