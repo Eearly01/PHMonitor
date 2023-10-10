@@ -22,8 +22,20 @@ builder.Services.AddIdentityServer()
 builder.Services.AddAuthentication()
     .AddIdentityServerJwt();
 
-builder.Services.AddControllersWithViews();
-builder.Services.AddRazorPages();
+builder.Services.AddControllersWithViews().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.Converters.Add(new UInt32ArrayConverter());
+});
+builder.Services.AddRazorPages().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.Converters.Add(new UInt32ArrayConverter());
+});
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new UInt32ArrayConverter());
+    });
+
 
 var app = builder.Build();
 

@@ -10,7 +10,7 @@ export class FetchData extends Component {
     }
 
     componentDidMount() {
-        this.populateCpuTemperature();
+        this.populateHardwareInfo();
     }
 
     render() {
@@ -18,12 +18,7 @@ export class FetchData extends Component {
 
         let contents = loading ? (
             <p><em>Loading...</em></p>
-        ) : (
-            <div>
-                <h1>CPU Temperature</h1>
-                <p>The CPU temperature is: {temperature} °C</p>
-            </div>
-        );
+        ): <p>Finished</p>;
 
         return (
             <div>
@@ -32,7 +27,7 @@ export class FetchData extends Component {
         );
     }
 
-    async populateCpuTemperature() {
+    async populateHardwareInfo() {
         const token = await authService.getAccessToken();
         console.log('Access Token:', token); // Log the access token
         try {
@@ -44,7 +39,12 @@ export class FetchData extends Component {
             if (response.status === 200) {
                 const data = await response.json();
                 console.log(data);
-                this.setState({ temperature: data.temperature, loading: false });
+
+                const firstHardware = data.hardware[0];
+                const firstSensor = firstHardware?.Sensors[0];
+                const temperature = firstSensor?.Value || null;
+
+                this.setState({ temperature, loading: false });
             } else {
                 console.error('API returned status code:', response.status);
                 const responseText = await response.text();
