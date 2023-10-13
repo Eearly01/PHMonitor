@@ -19,25 +19,30 @@ function PerformanceGraph({ data, label, max }) {
             }
         ]
     };
+    const parseData = parseFloat(data);
 
     const options = {
         plugins: {
             legend: {
-                display: false,
+                display: true,
             },
             annotation: {
+                drawTime: 'afterDatasetsDraw', // This ensures the annotation is drawn after the dataset
                 annotations: [
                     {
                         type: 'line',
                         mode: 'horizontal',
-                        scaleID: 'r',
+                        scaleID: 'y', // This refers to the Y-axis scale
                         value: data,
                         borderColor: 'rgba(75,192,192,1)',
                         borderWidth: 2,
+                        position: 'end',
+                        adjustScaleRange: true,
                         label: {
-                            enabled: true,
-                            content: `Value: ${data}`,
-                            position: 'start'
+                            display: true,
+                            content: `Value: ${parseData.toFixed(2)}`, // This will show the value with two decimal places. Adjust as needed.
+                            position: 'start',
+                            color: 'black',
                         }
                     }
                 ]
@@ -46,6 +51,7 @@ function PerformanceGraph({ data, label, max }) {
         circumference: 90 * Math.PI,
         rotation: -45 * Math.PI
     };
+
 
     return (
         <div style={{ width: '30%' }}>

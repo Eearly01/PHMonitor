@@ -15,8 +15,9 @@ function HardwareInfoDisplay({ hardware }) {
     const cpuHardware = hardware.find(h => h.hType === "Cpu");
     const cpuTotalLoad = cpuHardware.sensors.find(s => s.name === "CPU Total")?.value || [];
     const coreAverageTemp = cpuHardware.sensors.find(s => s.name === "Core Average")?.value || [];
-    const cpuCoreVoltage = cpuHardware.sensors.find(s => s.name.startsWith("CPU Core") && s.sensorType === "Voltage").value || [];
-
+    const cpuCoreVoltage = cpuHardware.sensors.find(s => s.name.startsWith("CPU Core") && s.sensorType === "Voltage")?.value || [];
+    //console.log(cpuTotalLoad)
+  
     return (
 
         <div>
@@ -35,6 +36,7 @@ function HardwareInfoDisplay({ hardware }) {
                     {hardwareItems.map((h, hIdx) => (
                         <div key={hIdx} className="hardware-item">
                             <h3>{h.name}</h3>
+                            
 
                             {(() => {
                                 const groupedBySensorType = h.sensors.reduce((acc, curr) => {
@@ -42,6 +44,7 @@ function HardwareInfoDisplay({ hardware }) {
                                         acc[curr.sensorType] = [];
                                     }
                                     acc[curr.sensorType].push(curr);
+                                    console.log(acc)
                                     return acc;
                                 }, {});
 
