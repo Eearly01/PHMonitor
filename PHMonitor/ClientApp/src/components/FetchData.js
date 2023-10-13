@@ -17,7 +17,7 @@ export class FetchData extends Component {
     }
 
     componentWillUnmount() {
-        clearInterval(this.refreshInterval); // Clear the interval when the component is unmounted
+        clearInterval(this.refreshInterval); // Clear the interval when the component is unmounted 
     }
 
     render() {
