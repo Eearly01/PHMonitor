@@ -31,7 +31,6 @@ export class FetchData extends Component {
             contents = (
                 <>
                     <HardwareInfoDisplay hardware={hardware} />
-                    <button onClick={() => this.populateHardwareInfo()}>Refresh</button>
                 </>
             );
         } else {

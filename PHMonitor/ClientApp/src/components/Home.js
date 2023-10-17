@@ -1,26 +1,67 @@
 import React, { Component } from 'react';
 
-export class Home extends Component {
-  static displayName = Home.name;
+class Home extends Component {
+    static displayName = Home.name;
 
-  render() {
-    return (
-      <div>
-        <h1>Hello, world!</h1>
-        <p>Welcome to your new single-page application, built with:</p>
-        <ul>
-          <li><a href='https://get.asp.net/'>ASP.NET Core</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
-          <li><a href='https://facebook.github.io/react/'>React</a> for client-side code</li>
-          <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>
-        </ul>
-        <p>To help you get started, we have also set up:</p>
-        <ul>
-          <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>
-          <li><strong>Development server integration</strong>. In development mode, the development server from <code>create-react-app</code> runs in the background automatically, so your client-side resources are dynamically built on demand and the page refreshes when you modify any file.</li>
-          <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and your <code>dotnet publish</code> configuration produces minified, efficiently bundled JavaScript files.</li>
-        </ul>
-        <p>The <code>ClientApp</code> subdirectory is a standard React application based on the <code>create-react-app</code> template. If you open a command prompt in that directory, you can run <code>npm</code> commands such as <code>npm test</code> or <code>npm install</code>.</p>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div className="home-container">
+                <header>
+                    <h1>Welcome to Your Hardware Benchmarking Platform</h1>
+                </header>
+                <section className="features">
+                    <h2>Key Features</h2>
+                    <ul>
+                        <li>
+                            <strong>Compare Hardware Performance:</strong> Benchmark your computer's hardware and compare it with others to discover what works best.
+                        </li>
+                        <li>
+                            <strong>Real-time Monitoring:</strong> Monitor CPU and GPU performance in real-time and track temperature, voltage, and more.
+                        </li>
+                        <li>
+                            <strong>Interactive Dashboards:</strong> Visualize benchmark results with interactive graphs and charts.
+                        </li>
+                        <li>
+                            <strong>User-Friendly Interface:</strong> Easily navigate and explore hardware data with our intuitive interface.
+                        </li>
+                    </ul>
+                </section>
+                <section className="getting-started">
+                    <h2>Getting Started</h2>
+                    <p>Follow these steps to get started with our hardware benchmarking platform:</p>
+                    <ol>
+                        <li>
+                            <strong>Log In:</strong> Log in to your account to access the benchmarking features.
+                        </li>
+                        <li>
+                            <strong>Run Benchmarks:</strong> Run benchmark tests to assess your hardware's performance.
+                        </li>
+                        <li>
+                            <strong>Compare Results:</strong> Compare your benchmark results with other users to find optimal hardware configurations.
+                        </li>
+                        <li>
+                            <strong>Explore Data:</strong> Explore real-time hardware data and graphs to make informed decisions.
+                        </li>
+                    </ol>
+                </section>
+                <section className="technologies-used">
+                    <h2>Technologies Used</h2>
+                    <p>Our platform is built with the following technologies:</p>
+                    <ul>
+                        <li>
+                            <strong>Backend:</strong> ASP.NET Core and C# for server-side code.
+                        </li>
+                        <li>
+                            <strong>Frontend:</strong> React for client-side code.
+                        </li>
+                        <li>
+                            <strong>Styling:</strong> Bootstrap for layout and styling.
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        );
+    }
 }
+
+export default Home;

@@ -1,0 +1,79 @@
+﻿.hardware-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Styles for the performance graph */
+
+.hardware-graph {
+    width: 30%;
+    margin-bottom: 20px;
+}
+
+.performance-graph {
+    text-align: center;
+}
+
+.graph-header {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.graph-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Styles for hardware categories and items */
+.hardware-category {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    width: 100%;
+    
+    
+}
+
+.hardware-type-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.hardware-item {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 15px;
+
+}
+
+/* Styles for sensors */
+.sensor-container {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9; 
+    border-radius: 5px;
+    width: 15em;
+}
+
+    .sensor-container h4 {
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+
+    .sensor-container ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+/* Styles for sensor items */
+.sensor-item {
+    margin-top: 5px;
+    list-style-type: none;
+    font-size: 14px;
+    color: #333;
+}

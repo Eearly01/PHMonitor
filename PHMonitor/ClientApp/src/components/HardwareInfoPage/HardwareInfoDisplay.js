@@ -1,5 +1,6 @@
 import React from 'react';
 import PerformanceGraph from './PerformanceGraph';
+import './HardwareInfo.css';
 
 function HardwareInfoDisplay({ hardware }) {
     // Grouping hardware based on 'hType'
@@ -22,11 +23,16 @@ function HardwareInfoDisplay({ hardware }) {
 
         <div>
             <div>
-                <h1 className="hardware-title">{hardware[0].name}</h1>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <PerformanceGraph data={cpuTotalLoad} label="CPU Total Load" max={100} />
-                    <PerformanceGraph data={coreAverageTemp} label="Core Average Temperature" max={80} />
-                    <PerformanceGraph data={cpuCoreVoltage} label="CPU Core Voltage" max={1.35} />
+                <div className="graph-container">
+                    <div className='hardware-graph'>
+                        <PerformanceGraph data={cpuTotalLoad} label="CPU Total Load" max={100} unit='%' />
+                    </div>
+                    <div className='hardware-graph'>
+                        <PerformanceGraph data={coreAverageTemp} label="Core Average Temperature/100C" max={100} unit='C' />
+                    </div>
+                    <div className='hardware-graph'>
+                        <PerformanceGraph data={cpuCoreVoltage} label="CPU Core Voltage/1.35" max={1.35} unit='V' />
+                    </div>
                 </div>
             </div>
             {Object.entries(groupedByHType).map(([hType, hardwareItems], idx) => (
@@ -34,33 +40,33 @@ function HardwareInfoDisplay({ hardware }) {
                     <h2 className="hardware-type-title">{hType}</h2>
 
                     {hardwareItems.map((h, hIdx) => (
-                        <div key={hIdx} className="hardware-item">
+                        <div key={hIdx} >
                             <h3>{h.name}</h3>
-                            
+                            <div className="hardware-item">
+                                {(() => {
+                                    const groupedBySensorType = h.sensors.reduce((acc, curr) => {
+                                        if (!acc[curr.sensorType]) {
+                                            acc[curr.sensorType] = [];
+                                        }
+                                        acc[curr.sensorType].push(curr);
+                                        return acc;
+                                    }, {});
 
-                            {(() => {
-                                const groupedBySensorType = h.sensors.reduce((acc, curr) => {
-                                    if (!acc[curr.sensorType]) {
-                                        acc[curr.sensorType] = [];
-                                    }
-                                    acc[curr.sensorType].push(curr);
-                                    console.log(acc)
-                                    return acc;
-                                }, {});
+                                    return Object.entries(groupedBySensorType).map(([sensorType, sensors], sIdx) => (
+                                        <div key={sIdx} className='sensor-container'>
+                                            <h4>{sensorType}</h4>
+                                            <ul>
+                                                {sensors.map((s, ssIdx) => (
+                                                    <li className="sensor-item" key={ssIdx}>
+                                                        {s.name}: {s.value}
+                                                    </li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    ));
+                                })()}
+                            </div>
 
-                                return Object.entries(groupedBySensorType).map(([sensorType, sensors], sIdx) => (
-                                    <div key={sIdx}>
-                                        <h4>{sensorType}</h4>
-                                        <ul>
-                                            {sensors.map((s, ssIdx) => (
-                                                <li className="sensor-item" key={ssIdx}>
-                                                    {s.name}: {s.value}
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </div>
-                                ));
-                            })()}
                         </div>
                     ))}
                 </div>
