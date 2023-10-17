@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Home extends Component {
+export class Home extends Component {
     static displayName = Home.name;
 
     render() {
@@ -63,5 +63,3 @@ class Home extends Component {
         );
     }
 }
-
-export default Home;
