@@ -1,18 +1,42 @@
-﻿a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+﻿/* NavMenu.css */
+
+/* Reset some default styles */
+.navbar {
+    background-color: var(--color-primary);
+    transition: var(--transition-all);
 }
 
-html {
-  font-size: 14px;
+.navbar-brand,
+.nav-link {
+    color: var(--color-white) !important;
+    font-weight: 500;
+    transition: var(--transition-all);
 }
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+
+    .navbar-brand:hover,
+    .nav-link:hover {
+        color: var(--color-secondary) !important;
+    }
+
+.navbar-toggler-icon {
+    filter: brightness(0) invert(1);
+}
+
+.navbar-toggler {
+    border-color: var(--color-grey-2);
+}
+
+.navbar-nav {
+    font-size: 1.1rem;
 }
 
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Adjustments for smaller screens */
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 1.2rem;
+    }
 }

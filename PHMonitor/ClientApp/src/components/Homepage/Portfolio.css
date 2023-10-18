@@ -6,59 +6,54 @@
     padding: 0;
     box-sizing: border-box;
     list-style: none;
+    font-family: "Roboto", sans-serif;
 }
 
 /* Define custom CSS variables */
 :root {
-    --color-primary: #191d2b;
-    --color-secondary: #27ae60;
-    --color-white: #ffffff;
-    --color-black: #000;
+    --color-primary: #1f2833;
+    --color-secondary: #66fcf1;
+    --color-white: #c5c6c7;
+    --color-black: #0b0c10;
     --color-grey0: #f8f8f8;
-    --color-grey-1: #dbe1e8;
-    --color-grey-2: #b2becd;
-    --color-grey-3: #6c7983;
-    --color-grey-4: #454e56;
-    --color-grey-5: #2a2e35;
-    --color-grey-6: #12181b;
+    --color-grey-1: #c5c6c7;
+    --color-grey-2: #9da5b4;
+    --color-grey-3: #6c7b8a;
+    --color-grey-4: #4b5268;
+    --color-grey-5: #333a47;
+    --color-grey-6: #1e232f;
     --br-sm-2: 14px;
-    --transition-all: all 0.4s ease-in-out;
+    --transition-all: all 0.3s ease-in-out;
     --box-shadow-1: 0 3px 15px rgba(0, 0, 0, 0.2);
 }
 
-/* Apply styles to the body */
 body {
     background-color: var(--color-primary);
-    font-family: "Poppins", sans-serif;
     font-size: 1.1rem;
     color: var(--color-white);
-    transition: all 0.4s ease-in-out;
+    transition: var(--transition-all);
 }
 
-/* Apply styles to anchor links */
 a {
     display: inline-block;
     text-decoration: none;
-    color: inherit;
-    font-family: inherit;
+    color: var(--color-secondary);
+    transition: var(--transition-all);
 }
 
+    a:hover {
+        color: var(--color-white);
+    }
 
 .header-content {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     height: 100%;
+    align-items: center;
 }
 
 .left-header .h-shape {
-    transition: var(--transition-all);
-    width: 65%;
-    height: 100%;
-    background-color: var(--color-secondary);
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: -1;
+
 }
 
 .left-header .image {
@@ -67,19 +62,19 @@ a {
     width: 68%;
     margin-left: 4rem;
     background-color: var(--color-black);
+    overflow: hidden;
     transition: var(--transition-all);
 }
 
     .left-header .image img {
         width: 100%;
         height: 100%;
-        -o-object-fit: cover;
         object-fit: cover;
         transition: var(--transition-all);
     }
 
         .left-header .image img:hover {
-            filter: grayscale(0);
+            transform: scale(1.1);
         }
 
 .right-header {
@@ -91,6 +86,7 @@ a {
 
     .right-header .name {
         font-size: 3rem;
+        font-weight: 500;
     }
 
         .right-header .name span {
@@ -100,10 +96,9 @@ a {
     .right-header p {
         margin: 1.5rem 0;
         line-height: 2rem;
+        font-weight: 300;
     }
-/* Add more styles for other sections as needed */
 
-/* Styles for the main navigation controls */
 .controlls {
     position: fixed;
     z-index: 10;
@@ -117,7 +112,7 @@ a {
 }
 
     .controlls .active-btn {
-        background-color: var(--color-secondary) !important;
+        background-color: var(--color-secondary);
         transition: var(--transition-all);
     }
 
@@ -136,7 +131,12 @@ a {
         justify-content: center;
         margin: 0.7rem 0;
         box-shadow: var(--box-shadow-1);
+        transition: var(--transition-all);
     }
+
+        .controlls .control:hover {
+            background-color: var(--color-secondary);
+        }
 
         .controlls .control i {
             font-size: 1.2rem;
@@ -144,13 +144,20 @@ a {
             pointer-events: none;
         }
 
-/* Additional styles for different sections can be added here */
-
-/* Media queries for responsiveness */
 @media screen and (max-width: 600px) {
-    /* Add responsive styles for smaller screens */
+    /* Adjust styles for smaller screens */
+    .header-content {
+        grid-template-columns: 1fr;
+    }
+
+    .right-header {
+        padding-right: 2rem;
+    }
 }
 
 @media screen and (max-width: 1432px) {
-    /* Add responsive styles for medium-sized screens */
+    /* Adjust styles for medium-sized screens */
+    .right-header {
+        padding-right: 4rem;
+    }
 }
