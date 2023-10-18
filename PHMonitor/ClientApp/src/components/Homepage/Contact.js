@@ -53,7 +53,9 @@ class Contact extends Component {
         const { name, email, subject, message } = this.state;
 
         return (
+            
             <form className='contact-form' onSubmit={this.handleSubmit}>
+                <h2>Contact Me</h2>
                 <div>
                     <label>Name:</label>
                     <input

@@ -45,6 +45,13 @@ a {
         color: var(--color-white);
     }
 
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px 0;
+}
+
 .header-content {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -53,7 +60,6 @@ a {
 }
 
 .left-header .h-shape {
-
 }
 
 .left-header .image {
@@ -99,50 +105,67 @@ a {
         font-weight: 300;
     }
 
-.controlls {
-    position: fixed;
-    z-index: 10;
-    top: 50%;
-    right: 3%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transform: translateY(-50%);
+    .right-header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+    }
+
+    .right-header h2 {
+        font-size: 2rem;
+        color: var(--color-secondary);
+        margin-bottom: 20px;
+    }
+
+.section {
+    margin: 50px 0;
 }
 
-    .controlls .active-btn {
-        background-color: var(--color-secondary);
-        transition: var(--transition-all);
+    .section h2 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+        text-align: center;
     }
 
-        .controlls .active-btn i {
-            color: var(--color-white);
-        }
+.about-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
 
-    .controlls .control {
-        padding: 1rem;
-        cursor: pointer;
-        background-color: var(--color-grey-4);
-        height: 55px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0.7rem 0;
-        box-shadow: var(--box-shadow-1);
-        transition: var(--transition-all);
+.left-about, .right-about {
+    width: 48%; /* Slightly less than half to account for the gap */
+}
+
+.portfolio {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.portfolio-item {
+    position: relative;
+    overflow: hidden;
+}
+
+    .portfolio-item:hover .hover-items {
+        opacity: 1;
     }
 
-        .controlls .control:hover {
-            background-color: var(--color-secondary);
-        }
-
-        .controlls .control i {
-            font-size: 1.2rem;
-            color: var(--color-grey-2);
-            pointer-events: none;
-        }
+.hover-items {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    color: var(--color-white);
+    opacity: 0;
+    transition: opacity 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 @media screen and (max-width: 600px) {
     /* Adjust styles for smaller screens */
