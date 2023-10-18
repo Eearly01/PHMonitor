@@ -1,13 +1,27 @@
-﻿.hardware-title {
-    font-size: 24px;
-    margin-bottom: 20px;
+﻿/* Variables For Consitency */
+:root {
+    --primary-font: 'Roboto', sans-serif;
+    --primary-font-size: 24px;
+    --secondary-font-size: 18px;
+    --tertiary-font-size: 16px;
+    --quaternary-font-size: 14px;
+    --primary-color: #2c3e50; /* Darker gray for main text */
+    --secondary-color: #7f8c8d; /* Lighter gray for secondary text or borders */
+    --background-color: #f9f9f9; /* Background for Sensor containers */
+    --primary-margin: 20px;
+    --secondary-margin: 10px;
+    --tertiary-margin: 5px;
+}
+
+body {
+    font-family: var(--primary-font);
+    color: var(--primary-color);
 }
 
 /* Styles for the performance graph */
-
 .hardware-graph {
     width: 30%;
-    margin-bottom: 20px;
+    margin-bottom: var(--primary-margin);
 }
 
 .performance-graph {
@@ -15,8 +29,8 @@
 }
 
 .graph-header {
-    font-size: 16px;
-    margin-bottom: 8px;
+    font-size: var(--tertiary-font-size);
+    margin-bottom: var(--secondary-margin);
 }
 
 .graph-container {
@@ -31,37 +45,35 @@
     flex-direction: column;
     margin-top: 30px;
     width: 100%;
-    
-    
 }
 
 .hardware-type-title {
-    font-size: 18px;
-    margin-bottom: 10px;
+    font-size: var(--secondary-font-size);
+    margin-bottom: var(--secondary-margin);
 }
 
 .hardware-item {
     display: flex;
     flex-wrap: wrap;
     margin-top: 15px;
-
 }
 
 /* Styles for sensors */
 .sensor-container {
     display: flex;
     flex-direction: column;
-    border: 1px solid #ccc;
+    border: 1px solid var(--secondary-color);
     padding: 10px;
-    margin-bottom: 10px;
-    background-color: #f9f9f9; 
+    margin-bottom: var(--secondary-margin);
+    background-color: var(--background-color);
     border-radius: 5px;
     width: 15em;
 }
 
     .sensor-container h4 {
-        font-size: 16px;
-        margin-bottom: 5px;
+        font-size: var(--tertiary-font-size);
+        margin-bottom: var(--tertiary-margin);
+        color: var(--secondary-color);
     }
 
     .sensor-container ul {
@@ -72,8 +84,8 @@
 
 /* Styles for sensor items */
 .sensor-item {
-    margin-top: 5px;
+    margin-top: var(--tertiary-margin);
     list-style-type: none;
-    font-size: 14px;
-    color: #333;
+    font-size: var(--quaternary-font-size);
+    color: var(--primary-color);
 }

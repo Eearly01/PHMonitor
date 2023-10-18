@@ -1,11 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import 'react-circular-progressbar/dist/styles.css';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 
 function PerformanceGraph({ data, label, max, unit }) {
     const percentage = (data / max) * 100;
 
-    //Gradient for color change
     const gradient = `conic-gradient(
         #007BFF ${data - 1}%,
         transparent ${data - 1}%,
@@ -31,5 +31,19 @@ function PerformanceGraph({ data, label, max, unit }) {
         </div>
     );
 }
+
+//Type checking to remain thorough
+
+PerformanceGraph.propTypes = {
+    data: PropTypes.number.isRequired,
+    label: PropTypes.string.isRequired,
+    max: PropTypes.number,
+    unit: PropTypes.string
+};
+
+PerformanceGraph.defaultProps = {
+    max: 100,
+    unit: '%'
+};
 
 export default PerformanceGraph;
