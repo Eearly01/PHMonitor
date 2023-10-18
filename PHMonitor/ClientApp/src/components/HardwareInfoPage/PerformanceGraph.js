@@ -6,12 +6,15 @@ import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 function PerformanceGraph({ data, label, max, unit }) {
     const percentage = (data / max) * 100;
 
-    const gradient = `conic-gradient(
-        #007BFF ${data - 1}%,
-        transparent ${data - 1}%,
-        transparent ${data + 1}%,
-        #007BFF ${data + 1}%
-    )`;
+    // Linear interpolation function
+    const lerp = (start, end, t) => start * (1 - t) + end * t;
+
+    // Compute the RGB values based on the percentage
+    const r = Math.round(lerp(0, 255, percentage / 100));
+    const g = Math.round(lerp(123, 0, percentage / 100));
+    const b = Math.round(lerp(255, 0, percentage / 100));
+
+    const color = `rgb(${r}, ${g}, ${b})`;
 
     return (
         <div className="performance-graph">
@@ -22,9 +25,9 @@ function PerformanceGraph({ data, label, max, unit }) {
                     text={`${data.toFixed(2)}${unit}`}
                     strokeWidth={10}
                     styles={buildStyles({
-                        textColor: '#333',
-                        pathColor: gradient,
-                        trailColor: '#f0f0f0',
+                        textColor: '#c5c6c7',
+                        pathColor: color,
+                        trailColor: '#c5c6c7',
                     })}
                 />
             </div>
@@ -32,8 +35,7 @@ function PerformanceGraph({ data, label, max, unit }) {
     );
 }
 
-//Type checking to remain thorough
-
+// Type checking to remain thorough
 PerformanceGraph.propTypes = {
     data: PropTypes.number.isRequired,
     label: PropTypes.string.isRequired,
