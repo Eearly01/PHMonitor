@@ -32,7 +32,7 @@ const FetchData = () => {
         };
 
         fetchHardwareInfo();
-        const intervalId = setInterval(fetchHardwareInfo, 3000);
+        const intervalId = setInterval(fetchHardwareInfo, 6000);
         return () => clearInterval(intervalId); // Cleanup on unmount
     }, []);
 
