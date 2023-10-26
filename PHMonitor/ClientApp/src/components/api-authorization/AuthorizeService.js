@@ -174,30 +174,33 @@ export class AuthorizeService {
     return { status: AuthenticationResultStatus.Redirect };
   }
 
-  async ensureUserManagerInitialized() {
-    if (this.userManager !== undefined) {
-      return;
+    async ensureUserManagerInitialized() {
+        if (this.userManager !== undefined) {
+            return;
+        }
+
+        const response = await fetch('api/configuration/auth-settings');
+        if (!response.ok) {
+            throw new Error('Could not load authentication settings');
+        }
+
+        const settings = await response.json();
+        settings.userStore = new WebStorageStateStore({
+            prefix: ApplicationName
+        });
+
+        // Ensure that the scopes include 'openid' and 'email'
+        settings.scope = 'openid profile email';
+
+        this.userManager = new UserManager(settings);
+
+        this.userManager.events.addUserSignedOut(async () => {
+            await this.userManager.removeUser();
+            this.updateState(undefined);
+        });
     }
 
-    let response = await fetch(ApplicationPaths.ApiAuthorizationClientConfigurationUrl);
-    if (!response.ok) {
-      throw new Error(`Could not load settings for '${ApplicationName}'`);
-    }
 
-    let settings = await response.json();
-    settings.automaticSilentRenew = true;
-    settings.includeIdTokenInSilentRenew = true;
-    settings.userStore = new WebStorageStateStore({
-      prefix: ApplicationName
-    });
-
-    this.userManager = new UserManager(settings);
-
-    this.userManager.events.addUserSignedOut(async () => {
-      await this.userManager.removeUser();
-      this.updateState(undefined);
-    });
-  }
 
   static get instance() { return authService }
 }

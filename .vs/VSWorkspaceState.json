@@ -2,10 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\PHMonitor",
-    "\\PHMonitor\\ClientApp\\public",
+    "\\PHMonitor\\ClientApp",
     "\\PHMonitor\\Controllers",
     "\\PHMonitor\\Data"
   ],
-  "SelectedNode": "\\PHMonitor\\Program.cs",
+  "SelectedNode": "\\PHMonitor\\PHMonitor.csproj",
   "PreviewInSolutionExplorer": false
 }

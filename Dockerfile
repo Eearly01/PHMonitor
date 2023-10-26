@@ -1,15 +1,26 @@
+# Use the .NET 7 SDK for building
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build-env
 WORKDIR /app
 
-COPY . ./
+# Install Node.js 20
+RUN curl -sL https://deb.nodesource.com/setup_20.x | bash - && \
+    apt-get install -y nodejs
 
-# Restore dependencies
-RUN dotnet restore
-# Build and publish a release
-RUN dotnet publish -c Release -o out
+# Install npm dependencies
+COPY PHMonitor/ClientApp/package*.json PHMonitor/ClientApp/
+RUN npm install --prefix PHMonitor/ClientApp
 
-# Build runtime image
+# Copy the rest of the application
+COPY PHMonitor/ PHMonitor/
+
+# Restore .NET dependencies and publish the project
+WORKDIR /app/PHMonitor
+RUN dotnet restore PHMonitor.csproj && \
+    dotnet publish PHMonitor.csproj -c Release -o out
+
+# Use the .NET 7 runtime for the final image
 FROM mcr.microsoft.com/dotnet/aspnet:7.0
-WORKDIR /App
-COPY --from=build-env /app/out .
-ENTRYPOINT ["dotnet", "dotnet.dll"]
+WORKDIR /app
+COPY --from=build-env /app/PHMonitor/out .
+EXPOSE 8080
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet PHMonitor.dll

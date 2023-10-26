@@ -63,22 +63,27 @@ export class Login extends Component {
     }
   }
 
-  async login(returnUrl) {
-    const state = { returnUrl };
-    const result = await authService.signIn(state);
-    switch (result.status) {
-      case AuthenticationResultStatus.Redirect:
-        break;
-      case AuthenticationResultStatus.Success:
-        await this.navigateToReturnUrl(returnUrl);
-        break;
-      case AuthenticationResultStatus.Fail:
-        this.setState({ message: result.message });
-        break;
-      default:
-        throw new Error(`Invalid status result ${result.status}.`);
+    async login(returnUrl) {
+        const state = { returnUrl };
+        try {
+            // Fetch the authentication settings from the server
+            const response = await fetch('/api/configuration/auth-settings');
+            if (!response.ok) {
+                throw new Error('Could not load authentication settings');
+            }
+            const settings = await response.json();
+
+            // Redirect to AWS Cognito's hosted UI
+            //const cognitoLoginUrl = `https://${settings.Authority}.auth.${settings.Region}.amazoncognito.com/login?client_id=${settings.ClientId}&response_type=code&scope=${settings.Scope}&redirect_uri=${settings.RedirectUri}`;
+            window.location.href = `${settings.Authority}/login?client_id=${settings.ClientId}&response_type=code&scope=${settings.Scope}&redirect_uri=${settings.RedirectUri}`;
+
+        } catch (error) {
+            console.error('Login error: ', error);
+            this.setState({ message: 'An error occurred while logging in. Please try again later.' });
+        }
     }
-  }
+
+
 
   async processLoginCallback() {
     const url = window.location.href;
