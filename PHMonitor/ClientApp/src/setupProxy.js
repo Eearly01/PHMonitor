@@ -2,16 +2,17 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 const { env } = require('process');
 
 const target = env.ASPNETCORE_HTTPS_PORT ? `https://localhost:${env.ASPNETCORE_HTTPS_PORT}` :
-  env.ASPNETCORE_URLS ? env.ASPNETCORE_URLS.split(';')[0] : 'http://localhost:2316';
+    env.ASPNETCORE_URLS ? env.ASPNETCORE_URLS.split(';')[0] : 'http://localhost:2316';
 
 const context = [
-  "/api/hardware",
-  "/_configuration",
-  "/.well-known",
-  "/Identity",
-  "/connect",
-  "/ApplyDatabaseMigrations",
-  "/_framework"
+    "/api/hardware",
+    "/api/configuration",
+    "/_configuration",
+    "/.well-known",
+    "/Identity",
+    "/connect",
+    "/ApplyDatabaseMigrations",
+    "/_framework"
 ];
 
 const onError = (err, req, resp, target) => {
@@ -19,19 +20,20 @@ const onError = (err, req, resp, target) => {
 }
 
 module.exports = function (app) {
-  const appProxy = createProxyMiddleware(context, {
-    proxyTimeout: 10000,
-    target: target,
-    // Handle errors to prevent the proxy middleware from crashing when
-    // the ASP NET Core webserver is unavailable
-    onError: onError,
-    secure: false,
-    // Uncomment this line to add support for proxying websockets
-    //ws: true, 
-    headers: {
-      Connection: 'Keep-Alive'
-    }
-  });
+    const appProxy = createProxyMiddleware(context, {
+        proxyTimeout: 10000,
+        target: target,
+        onError: onError,
+        secure: false,
+        headers: {
+            Connection: 'Keep-Alive'
+        },
+        onProxyRes: function (proxyRes, req, res) {
+            res.header('Access-Control-Allow-Origin', '*');
+            res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+            res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+        }
+    });
 
-  app.use(appProxy);
+    app.use(appProxy);
 };

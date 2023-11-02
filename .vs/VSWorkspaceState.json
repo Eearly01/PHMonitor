@@ -3,9 +3,13 @@
     "",
     "\\PHMonitor",
     "\\PHMonitor\\ClientApp",
+    "\\PHMonitor\\ClientApp\\src",
+    "\\PHMonitor\\ClientApp\\src\\components",
+    "\\PHMonitor\\ClientApp\\src\\components\\api-authorization",
+    "\\PHMonitor\\ClientApp\\src\\components\\HardwareInfoPage",
     "\\PHMonitor\\Controllers",
     "\\PHMonitor\\Data"
   ],
-  "SelectedNode": "\\PHMonitor\\PHMonitor.csproj",
+  "SelectedNode": "\\PHMonitor\\Controllers\\ConfigurationController.cs",
   "PreviewInSolutionExplorer": false
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import authService from './api-authorization/AuthorizeService';
+import authorizeService from './user-authentication/AuthorizeService';
 import HardwareInfoDisplay from './HardwareInfoPage/HardwareInfoDisplay';
 
 const FetchData = () => {
@@ -9,7 +9,7 @@ const FetchData = () => {
 
     useEffect(() => {
         const fetchHardwareInfo = async () => {
-            const token = await authService.getAccessToken();
+            const token = await authorizeService.getAccessToken();
             try {
                 const response = await fetch('api/hardware', {
                     headers: !token ? {} : { 'Authorization': `Bearer ${token}` }
