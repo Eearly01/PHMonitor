@@ -6,7 +6,7 @@ namespace PHMonitor.Data.DTOs
     {
         public string Name { get; set; } = string.Empty;
         public string HType { get; set; } = string.Empty;
-        public List<SensorInfoDto> Sensors { get; set; }
+        public List<SensorInfoDto>? Sensors { get; set; }
     }
 
     public class SensorInfoDto

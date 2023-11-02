@@ -6,7 +6,7 @@ using PHMonitor.Data.DTOs;
 
 namespace PHMonitor.Controllers
 {
-    [Authorize]
+    // [Authorize]
     [ApiController]
     [Route("api/hardware")]
     public class HardwareInfoController : ControllerBase
