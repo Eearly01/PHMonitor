@@ -5,11 +5,11 @@
     "\\PHMonitor\\ClientApp",
     "\\PHMonitor\\ClientApp\\src",
     "\\PHMonitor\\ClientApp\\src\\components",
-    "\\PHMonitor\\ClientApp\\src\\components\\api-authorization",
     "\\PHMonitor\\ClientApp\\src\\components\\HardwareInfoPage",
+    "\\PHMonitor\\ClientApp\\src\\components\\user-authentication",
     "\\PHMonitor\\Controllers",
     "\\PHMonitor\\Data"
   ],
-  "SelectedNode": "\\PHMonitor\\Controllers\\ConfigurationController.cs",
+  "SelectedNode": "\\PHMonitor\\ClientApp\\src\\components\\HardwareInfoPage\\HardwareInfo.css",
   "PreviewInSolutionExplorer": false
 }

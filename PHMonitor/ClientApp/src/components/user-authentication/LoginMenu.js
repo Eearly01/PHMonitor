@@ -1,72 +1,38 @@
-import React, { Component, Fragment } from 'react';
-import { NavItem, NavLink } from 'reactstrap';
-import { Link } from 'react-router-dom';
-import authService from './AmplifyAuthService';
-import { ApplicationPaths } from './ApiAuthorizationConstants';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Auth } from 'aws-amplify';
 
-export class LoginMenu extends Component {
-    constructor(props) {
-        super(props);
+export const LoginMenu = () => {
+    const [user, setUser] = useState(null);
+    const navigate = useNavigate();
 
-        this.state = {
-            isAuthenticated: false,
-            userName: null
-        };
-    }
+    useEffect(() => {
+        Auth.currentAuthenticatedUser()
+            .then(currentUser => setUser(currentUser))
+            .catch(() => setUser(null));
+    }, []);
 
-    componentDidMount() {
-        this._subscription = authService.subscribe(() => this.populateState());
-        this.populateState();
-    }
+    const handleLogin = () => {
+        navigate('/login');
+    };
 
-    componentWillUnmount() {
-        authService.unsubscribe(this._subscription);
-    }
-
-    async populateState() {
-        const [isAuthenticated, user] = await Promise.all([authService.isAuthenticated(), authService.getUser()])
-        this.setState({
-            isAuthenticated,
-            userName: user && user.name
-        });
-    }
-
-    render() {
-        const { isAuthenticated, userName } = this.state;
-        if (!isAuthenticated) {
-            return this.anonymousView();
-        } else {
-            return this.authenticatedView(userName);
+    const handleLogout = async () => {
+        try {
+            await Auth.signOut();
+            setUser(null);
+            navigate('/');
+        } catch (error) {
+            console.error('Error signing out: ', error);
         }
-    }
+    };
 
-    authenticatedView(userName) {
-        return (<Fragment>
-            <NavItem>
-                <NavLink tag={Link} className="text-dark" to={ApplicationPaths.Profile}>Hello {userName}</NavLink>
-            </NavItem>
-            <NavItem>
-                <NavLink className="text-dark" href="#" onClick={this.logout}>Logout</NavLink>
-            </NavItem>
-        </Fragment>);
-    }
-
-    anonymousView() {
-        return (<Fragment>
-            <NavItem>
-                <NavLink tag={Link} className="text-dark" to={ApplicationPaths.Register}>Register</NavLink>
-            </NavItem>
-            <NavItem>
-                <NavLink className="text-dark" href="#" onClick={this.login}>Login</NavLink>
-            </NavItem>
-        </Fragment>);
-    }
-
-    login = () => {
-        authService.signIn();
-    }
-
-    logout = () => {
-        authService.signOut();
-    }
+    return (
+        <div>
+            {user ? (
+                <button onClick={handleLogout}>Logout</button>
+            ) : (
+                <button onClick={handleLogin}>Login</button>
+            )}
+        </div>
+    );
 }

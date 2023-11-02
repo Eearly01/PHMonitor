@@ -1,11 +1,14 @@
 import { Auth, Hub } from 'aws-amplify';
 
 class AmplifyAuthService {
-    async signIn() {
+    async signIn(username, password) {
         try {
-            await Auth.federatedSignIn(); // Redirects to the Cognito Hosted UI
+            const user = await Auth.signIn(username, password);
+            // Handle the successful sign in here
+            console.log('Sign in successful', user);
         } catch (error) {
             console.error('Error signing in', error);
+            // Handle the error here
         }
     }
 
