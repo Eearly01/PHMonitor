@@ -10,6 +10,6 @@
     "\\PHMonitor\\Controllers",
     "\\PHMonitor\\Data"
   ],
-  "SelectedNode": "\\PHMonitor\\ClientApp\\src\\components\\HardwareInfoPage\\HardwareInfo.css",
+  "SelectedNode": "\\Dockerfile",
   "PreviewInSolutionExplorer": false
 }
