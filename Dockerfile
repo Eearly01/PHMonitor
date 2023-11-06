@@ -22,5 +22,19 @@ RUN dotnet restore PHMonitor.csproj && \
 FROM mcr.microsoft.com/dotnet/aspnet:7.0
 WORKDIR /app
 COPY --from=build-env /app/PHMonitor/out .
-EXPOSE 8080
+
+# Set environment variables
+ENV Client_Id=41voio47onpma1mjo76t5uo62o
+ENV UserPool_Id=us-east-2_hyJOgAqH5
+ENV IdentityPool_Id=us-east-2:4e601076-600b-4fb2-9948-ed3659aa818d
+ENV AWS_Region=us-east-2
+ENV Cognito_Domain_Prefix=elijah-early-phmonitor
+
+# Expose port 80 for HTTP traffic
+EXPOSE 80
+
+# Set the ASP.NET Core environment to Production
+ENV ASPNETCORE_ENVIRONMENT=Production
+
+# Run the application on port 80 (or the port defined by the PORT environment variable)
 CMD ASPNETCORE_URLS=http://*:$PORT dotnet PHMonitor.dll
