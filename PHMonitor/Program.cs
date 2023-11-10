@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PHMonitor.Data;
-using PHMonitor.Models;
+//using PHMonitor.Models;
 using Microsoft.Extensions.Options;
 using PHMonitor; // Adjusted to match the namespace of DotEnv
 
@@ -19,13 +19,7 @@ DotEnv.Load(dotenv);
 builder.Configuration.AddEnvironmentVariables();
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
-
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
 
 // Configure AWS Cognito OpenID Connect authentication
 builder.Services.AddAuthentication(options =>

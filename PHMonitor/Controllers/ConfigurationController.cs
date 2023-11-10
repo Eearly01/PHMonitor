@@ -29,7 +29,7 @@ namespace PHMonitor.Controllers
                 if (string.IsNullOrEmpty(_configuration[setting]))
                 {
                     var errorMessage = $"Configuration setting '{setting}' is missing or empty.";
-                    _logger.LogError(errorMessage);
+                    _logger.LogError(errorMessage, "Error at ValidateConfiguration()");
                     throw new InvalidOperationException(errorMessage);
                 }
             }

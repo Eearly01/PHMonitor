@@ -63,7 +63,7 @@ namespace PHMonitor.Controllers
                     }).ToList(),
                 }).ToList();
 
-                c.Close();
+                c.Close(); 
 
                 return Ok(new { hardware = hardwareInfoDtos });
             }
