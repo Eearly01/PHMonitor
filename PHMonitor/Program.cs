@@ -7,6 +7,7 @@ using PHMonitor.Data;
 //using PHMonitor.Models;
 using Microsoft.Extensions.Options;
 using PHMonitor; // Adjusted to match the namespace of DotEnv
+using PHMonitor.SQL;
 
 Microsoft.IdentityModel.Logging.IdentityModelEventSource.ShowPII = true;
 
@@ -18,8 +19,13 @@ DotEnv.Load(dotenv);
 
 builder.Configuration.AddEnvironmentVariables();
 
-// Add services to the container.
-builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+// Add services for postgres database
+builder.Services.AddDbContext<AppDbContext>(options =>
+        options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")
+        .Replace("{DB_HOST}", Environment.GetEnvironmentVariable("DB_HOST"))
+        .Replace("{DB_DB}", Environment.GetEnvironmentVariable("DB_DB"))
+        .Replace("{DB_USER}", Environment.GetEnvironmentVariable("DB_USER"))
+        .Replace("{DB_PASSWORD}", Environment.GetEnvironmentVariable("DB_PASSWORD"))));
 
 // Configure AWS Cognito OpenID Connect authentication
 builder.Services.AddAuthentication(options =>
@@ -31,7 +37,7 @@ builder.Services.AddAuthentication(options =>
 .AddOpenIdConnect(options =>
 {
     options.ResponseType = "code";
-    options.MetadataAddress = $"https://elijah-early-phmonitor.auth.us-east-2.amazoncognito.com/.well-known/openid-configuration";
+    options.MetadataAddress = $"https://{builder.Configuration["Cognito_Domain_Prefix"]}.auth.{builder.Configuration["AWS_Region"]}.amazoncognito.com/.well-known/openid-configuration";
     options.ClientId = builder.Configuration["Client_Id"];
     options.SaveTokens = true;
     options.CallbackPath = "/authentication/login-callback";
@@ -84,11 +90,5 @@ app.MapControllerRoute(
 app.MapRazorPages();
 
 app.MapFallbackToFile("index.html");
-
-Console.WriteLine("Client_Id: " + builder.Configuration["Client_Id"]);
-Console.WriteLine("UserPool_Id: " + builder.Configuration["UserPool_Id"]);
-Console.WriteLine("AWS_Region: " + builder.Configuration["AWS_Region"]);
-Console.WriteLine("Cognito_Domain_Prefix: " + builder.Configuration["Cognito_Domain_Prefix"]);
-
 
 app.Run();
