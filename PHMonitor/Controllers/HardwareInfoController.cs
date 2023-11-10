@@ -6,11 +6,17 @@ using PHMonitor.Data.DTOs;
 
 namespace PHMonitor.Controllers
 {
-    [Authorize]
+    // [Authorize]
     [ApiController]
     [Route("api/hardware")]
     public class HardwareInfoController : ControllerBase
     {
+        private readonly ILogger<HardwareInfoController> _logger;
+
+        public HardwareInfoController(ILogger<HardwareInfoController> logger)
+        {
+            _logger = logger;
+        }
         public class UpdateVisitor : IVisitor
         {
             public void VisitComputer(IComputer computer)
@@ -26,39 +32,46 @@ namespace PHMonitor.Controllers
             public void VisitParameter(IParameter parameter) { }
         }
 
-
         [HttpGet]
         public ActionResult GetHardwareInfo()
         {
-            Computer c = new Computer
+            try
             {
-                IsGpuEnabled = true,
-                IsCpuEnabled = true,
-                IsMemoryEnabled = true,
-                IsMotherboardEnabled = true,
-                IsControllerEnabled = true,
-                IsStorageEnabled = true,
-            };
-
-            c.Open();
-            c.Accept(new UpdateVisitor());
-
-            var hardwareInfoDtos = c.Hardware.Select(h => new HardwareInfoDto
-            {
-                Name = h.Name,
-                HType = h.HardwareType.ToString(),
-                Sensors = h.Sensors.Select(s => new SensorInfoDto
+                Computer c = new Computer
                 {
-                    Name = s.Name,
-                    Value = s.Value,
-                    SensorType = s.SensorType.ToString(),
+                    IsGpuEnabled = true,
+                    IsCpuEnabled = true,
+                    IsMemoryEnabled = true,
+                    IsMotherboardEnabled = true,
+                    IsControllerEnabled = true,
+                    IsStorageEnabled = true,
+                };
 
-                }).ToList(),
-            }).ToList();
+                c.Open();
+                c.Accept(new UpdateVisitor());
 
-            c.Close();
+                var hardwareInfoDtos = c.Hardware.Select(h => new HardwareInfoDto
+                {
+                    Name = h.Name,
+                    HType = h.HardwareType.ToString(),
+                    Sensors = h.Sensors.Select(s => new SensorInfoDto
+                    {
+                        Name = s.Name,
+                        Value = s.Value,
+                        SensorType = s.SensorType.ToString(),
 
-            return Ok(new { hardware = hardwareInfoDtos });
+                    }).ToList(),
+                }).ToList();
+
+                c.Close(); 
+
+                return Ok(new { hardware = hardwareInfoDtos });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error retrieving hardware information");
+                return StatusCode(500, "An error occurred while retrieving hardware information.");
+            }
         }
     }
 }

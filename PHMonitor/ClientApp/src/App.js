@@ -1,23 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import AppRoutes from './AppRoutes';
-import AuthorizeRoute from './components/api-authorization/AuthorizeRoute';
 import { Layout } from './components/Layout';
-import './custom.css';
+import { LoginPage } from './components/user-authentication/LoginPage';
+import { LoginMenu } from './components/user-authentication/LoginMenu';
+import {Amplify} from 'aws-amplify';
+import awsconfig from './aws-exports';
 
-export default class App extends Component {
-  static displayName = App.name;
+Amplify.configure(awsconfig);
 
-  render() {
-    return (
-      <Layout>
-        <Routes>
-          {AppRoutes.map((route, index) => {
-            const { element, requireAuth, ...rest } = route;
-            return <Route key={index} {...rest} element={requireAuth ? <AuthorizeRoute {...rest} element={element} /> : element} />;
-          })}
-        </Routes>
-      </Layout>
-    );
-  }
+function App() {
+	return (
+		<Layout>
+			<LoginMenu />
+			<Routes>
+				{AppRoutes.map((route, index) => (
+					<Route key={index} {...route} />
+				))}
+				<Route path='/login' element={<LoginPage />} />
+			</Routes>
+		</Layout>
+	);
 }
+
+export default App;

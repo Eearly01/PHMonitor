@@ -2,10 +2,13 @@
   "ExpandedNodes": [
     "",
     "\\PHMonitor",
-    "\\PHMonitor\\ClientApp\\public",
+    "\\PHMonitor\\ClientApp",
+    "\\PHMonitor\\ClientApp\\src",
+    "\\PHMonitor\\ClientApp\\src\\components",
+    "\\PHMonitor\\ClientApp\\src\\components\\HardwareInfoPage",
+    "\\PHMonitor\\ClientApp\\src\\components\\user-authentication",
     "\\PHMonitor\\Controllers",
     "\\PHMonitor\\Data"
   ],
-  "SelectedNode": "\\PHMonitor\\Program.cs",
   "PreviewInSolutionExplorer": false
 }

@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-phmonitor-dev-184106-authRole",
+      "UnauthRoleArn": "arn:aws:iam::284991301540:role/amplify-phmonitor-dev-184106-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::284991301540:role/amplify-phmonitor-dev-184106-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-phmonitor-dev-184106-deployment",
+      "UnauthRoleName": "amplify-phmonitor-dev-184106-unauthRole",
+      "StackName": "amplify-phmonitor-dev-184106",
+      "StackId": "arn:aws:cloudformation:us-east-2:284991301540:stack/amplify-phmonitor-dev-184106/20780c00-7910-11ee-b50d-029cb980743f",
+      "AmplifyAppId": "d1i2ph45nro1os"
+    },
+    "categories": {
+      "auth": {
+        "phmonitor0ac59b8c": {}
+      }
+    }
+  }
+}
