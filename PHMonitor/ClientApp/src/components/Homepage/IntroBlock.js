@@ -1,7 +1,7 @@
 import React from 'react';
-import './Portfolio.css';
+import './IntroBlock.css';
 
-function Portfolio() {
+export const IntroBlock = () => {
     return (
         <div className="portfolio">
             <header>
@@ -70,5 +70,3 @@ function Portfolio() {
         </div>
     );
 }
-
-export default Portfolio;
