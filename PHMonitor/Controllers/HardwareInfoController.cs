@@ -48,6 +48,7 @@ namespace PHMonitor.Controllers
                 };
 
                 c.Open();
+                
                 c.Accept(new UpdateVisitor());
 
                 var hardwareInfoDtos = c.Hardware.Select(h => new HardwareInfoDto

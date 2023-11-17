@@ -11,7 +11,6 @@ namespace PHMonitor.SQL
         }
         public DbSet<User> Users { get; set; }
         public DbSet<Device> Devices { get; set; }
-        public DbSet<UserDeviceMapping> UserDeviceMappings { get; set; }
         public DbSet<QuestionnaireResponse> QuestionnaireResponses { get; set; }
     }
 }

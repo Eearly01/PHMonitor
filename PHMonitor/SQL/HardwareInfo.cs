@@ -15,9 +15,10 @@ namespace PHMonitor.SQL
     public class Device
     {
         [Key]
-        public int DeviceId { get; set; }
-        public int UserId { get; set; }
+        [Required]
+        [MaxLength(100)] // Adjust the length as needed
         public string DeviceName { get; set; }
+        public int UserId { get; set; }  // Foreign key to User
         public string DeviceType { get; set; }
         public string Motherboard { get; set; }
         public double AverageCoreTemp { get; set; }
@@ -32,35 +33,24 @@ namespace PHMonitor.SQL
         public User User { get; set; }
     }
 
-    public class UserDeviceMapping
+public class QuestionnaireResponse
+{
+    [Key]
+    public int ResponseId { get; set; }
+    public int UserId { get; set; }
+    public string DeviceName { get; set; }
+    public bool FactoryDefaultParts { get; set; }
+    public string ModifiedParts { get; set; } // JSON or delimited text
+    public bool IsUndervolting { get; set; }
+
+    [ForeignKey("UserId")]
+    public User User { get; set; }
+
+    [ForeignKey("DeviceName")]
+    public Device Device
     {
-        [Key]
-        public int MappingId { get; set; }
-        public int UserId { get; set; }
-        public int DeviceId { get; set; }
-
-        [ForeignKey("UserId")]
-        public User User { get; set; }
-
-        [ForeignKey("DeviceId")]
-        public Device Device { get; set; }
+        get; set;
     }
-
-    public class QuestionnaireResponse
-    {
-        [Key]
-        public int ResponseId { get; set; }
-        public int UserId { get; set; }
-        public int DeviceId { get; set; }
-        public bool FactoryDefaultParts { get; set; }
-        public string ModifiedParts { get; set; } // JSON or delimited text
-        public bool IsUndervolting { get; set; }
-
-        [ForeignKey("UserId")]
-        public User User { get; set; }
-
-        [ForeignKey("DeviceId")]
-        public Device Device { get; set; }
-    }
+}
 
 }

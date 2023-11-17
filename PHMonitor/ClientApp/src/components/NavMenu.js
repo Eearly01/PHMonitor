@@ -39,12 +39,12 @@ export const NavMenu = () => {
 							</NavLink>
 						</NavItem>
 						<NavItem>
-							<NavLink tag={Link} className='text-dark' to='/fetch-data'>
-								Fetch data
+							<NavLink tag={Link} className='text-dark' to='/hardware-info'>
+								Hardware Info
 							</NavLink>
 						</NavItem>
 						<NavItem>
-							<NavLink tag={Link} className='text-dark' to='/addtodb'>
+							<NavLink tag={Link} className='text-dark' to='/database'>
 								DataBase
 							</NavLink>
 						</NavItem>

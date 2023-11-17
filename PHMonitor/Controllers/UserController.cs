@@ -3,7 +3,8 @@ using PHMonitor.SQL; // Replace with your actual namespace
 using System.Threading.Tasks;
 using PHMonitor.Data;
 
-namespace PHMonitor.Controllers {
+namespace PHMonitor.Controllers
+{
     [ApiController]
     [Route("api/[controller]")]
     public class UserController : ControllerBase
@@ -23,10 +24,17 @@ namespace PHMonitor.Controllers {
                 return BadRequest(ModelState);
             }
 
+            // Check if the device exists for the user
+            var device = _context.Devices.FirstOrDefault(d => d.DeviceName == responseDto.DeviceName && d.UserId == responseDto.UserId);
+            if (device == null)
+            {
+                return BadRequest("Device not found.");
+            }
+
             var questionnaireResponse = new QuestionnaireResponse
             {
                 UserId = responseDto.UserId,
-                DeviceId = responseDto.DeviceId,
+                DeviceName = responseDto.DeviceName,
                 FactoryDefaultParts = responseDto.FactoryDefaultParts,
                 ModifiedParts = responseDto.ModifiedParts,
                 IsUndervolting = responseDto.IsUndervolting
