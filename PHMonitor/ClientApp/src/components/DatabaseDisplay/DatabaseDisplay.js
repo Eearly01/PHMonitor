@@ -21,7 +21,7 @@ export const DatabaseDisplay = () => {
 		const fetchUserAndDevices = async () => {
 			try {
 				const user = await Auth.currentAuthenticatedUser();
-				const userId = user.attributes.sub; // 'sub' is the unique identifier for the user
+				const userId = user.attributes.sub;
 				setUserId(userId);
 
 				const response = await axios.get(`/api/device/user/${userId}`);

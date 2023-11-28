@@ -1,8 +1,36 @@
 {
   "auth": {
-    "phmonitor0ac59b8c": {
-      "customAuth": false,
-      "dependsOn": [],
+    "phmonitorauth": {
+      "customAuth": true,
+      "dependsOn": [
+        {
+          "attributes": [
+            "Arn",
+            "Name"
+          ],
+          "category": "function",
+          "resourceName": "phmonitorauthDefineAuthChallenge",
+          "triggerProvider": "Cognito"
+        },
+        {
+          "attributes": [
+            "Arn",
+            "Name"
+          ],
+          "category": "function",
+          "resourceName": "phmonitorauthCreateAuthChallenge",
+          "triggerProvider": "Cognito"
+        },
+        {
+          "attributes": [
+            "Arn",
+            "Name"
+          ],
+          "category": "function",
+          "resourceName": "phmonitorauthVerifyAuthChallengeResponse",
+          "triggerProvider": "Cognito"
+        }
+      ],
       "frontendAuthConfig": {
         "mfaConfiguration": "OFF",
         "mfaTypes": [
@@ -13,9 +41,12 @@
           "passwordPolicyMinLength": 8
         },
         "signupAttributes": [
-          "EMAIL"
+          "EMAIL",
+          "NAME"
         ],
-        "socialProviders": [],
+        "socialProviders": [
+          "GOOGLE"
+        ],
         "usernameAttributes": [
           "EMAIL"
         ],
@@ -25,6 +56,81 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
+    }
+  },
+  "function": {
+    "phmonitorauthCreateAuthChallenge": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "phmonitorauthDefineAuthChallenge": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "phmonitorauthVerifyAuthChallengeResponse": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_phmonitorauthCreateAuthChallenge_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "phmonitorauthCreateAuthChallenge"
+        }
+      ]
+    },
+    "AMPLIFY_function_phmonitorauthCreateAuthChallenge_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "phmonitorauthCreateAuthChallenge"
+        }
+      ]
+    },
+    "AMPLIFY_function_phmonitorauthDefineAuthChallenge_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "phmonitorauthDefineAuthChallenge"
+        }
+      ]
+    },
+    "AMPLIFY_function_phmonitorauthDefineAuthChallenge_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "phmonitorauthDefineAuthChallenge"
+        }
+      ]
+    },
+    "AMPLIFY_function_phmonitorauthVerifyAuthChallengeResponse_RECAPTCHASECRET": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "phmonitorauthVerifyAuthChallengeResponse"
+        }
+      ]
+    },
+    "AMPLIFY_function_phmonitorauthVerifyAuthChallengeResponse_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "phmonitorauthVerifyAuthChallengeResponse"
+        }
+      ]
+    },
+    "AMPLIFY_function_phmonitorauthVerifyAuthChallengeResponse_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "phmonitorauthVerifyAuthChallengeResponse"
+        }
+      ]
     }
   }
 }

@@ -45,6 +45,21 @@ namespace PHMonitor.Controllers
 
             return Ok(questionnaireResponse);
         }
+        [HttpDelete("user/{userId}")]
+        public async Task<IActionResult> DeleteUser(int userId)
+        {
+            var user = await _context.Users.FindAsync(userId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            _context.Users.Remove(user);
+            await _context.SaveChangesAsync();
+
+            return Ok(new { message = "User deleted successfully." });
+        }
+
     }
 
 }

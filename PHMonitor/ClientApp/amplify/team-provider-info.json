@@ -1,19 +1,35 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-phmonitor-dev-184106-authRole",
-      "UnauthRoleArn": "arn:aws:iam::284991301540:role/amplify-phmonitor-dev-184106-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::284991301540:role/amplify-phmonitor-dev-184106-authRole",
+      "AuthRoleName": "amplify-phmonitor-dev-180820-authRole",
+      "UnauthRoleArn": "arn:aws:iam::284991301540:role/amplify-phmonitor-dev-180820-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::284991301540:role/amplify-phmonitor-dev-180820-authRole",
       "Region": "us-east-2",
-      "DeploymentBucketName": "amplify-phmonitor-dev-184106-deployment",
-      "UnauthRoleName": "amplify-phmonitor-dev-184106-unauthRole",
-      "StackName": "amplify-phmonitor-dev-184106",
-      "StackId": "arn:aws:cloudformation:us-east-2:284991301540:stack/amplify-phmonitor-dev-184106/20780c00-7910-11ee-b50d-029cb980743f",
-      "AmplifyAppId": "d1i2ph45nro1os"
+      "DeploymentBucketName": "amplify-phmonitor-dev-180820-deployment",
+      "UnauthRoleName": "amplify-phmonitor-dev-180820-unauthRole",
+      "StackName": "amplify-phmonitor-dev-180820",
+      "StackId": "arn:aws:cloudformation:us-east-2:284991301540:stack/amplify-phmonitor-dev-180820/3daf5630-8d82-11ee-a3ce-0664dbba442f",
+      "AmplifyAppId": "d3tpi8lbwchvyb",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-phmonitor-dev-180820-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
     },
     "categories": {
       "auth": {
-        "phmonitor0ac59b8c": {}
+        "phmonitorauth": {}
+      },
+      "function": {
+        "phmonitorauthDefineAuthChallenge": {
+          "deploymentBucketName": "amplify-phmonitor-dev-180820-deployment",
+          "s3Key": "amplify-builds/phmonitorauthDefineAuthChallenge-4566446455514b304441-build.zip"
+        },
+        "phmonitorauthCreateAuthChallenge": {
+          "deploymentBucketName": "amplify-phmonitor-dev-180820-deployment",
+          "s3Key": "amplify-builds/phmonitorauthCreateAuthChallenge-326e4a527a6853446b72-build.zip"
+        },
+        "phmonitorauthVerifyAuthChallengeResponse": {
+          "RECAPTCHASECRET": "AIzaSyBi7WXqxxEqowJ8VCQl5T9pHSvCbzjNlz8",
+          "deploymentBucketName": "amplify-phmonitor-dev-180820-deployment",
+          "s3Key": "amplify-builds/phmonitorauthVerifyAuthChallengeResponse-6d65434259675669666f-build.zip"
+        }
       }
     }
   }
